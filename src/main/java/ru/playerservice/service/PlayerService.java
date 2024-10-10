@@ -2,7 +2,9 @@ package ru.playerservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.playerservice.entity.PlayerPrefs;
 import ru.playerservice.entity.PlayerProfile;
+import ru.playerservice.entity.PlayerStats;
 import ru.playerservice.repository.PlayerProfileRepository;
 
 import java.util.Optional;
@@ -20,7 +22,14 @@ public class PlayerService {
     /**
      * Создает новый профиль игрока.
      */
-    public PlayerProfile createPlayerProfile(PlayerProfile profile) {
+    public PlayerProfile createPlayerProfile(UUID idUser, String nickname) {
+        PlayerStats playerStats = new PlayerStats();
+        PlayerPrefs playerPrefs = new PlayerPrefs();
+        PlayerProfile profile = new PlayerProfile();
+        profile.setUserId(idUser);
+        profile.setPreferences(playerPrefs);
+        profile.setNickname(nickname);
+        profile.setStatistics(playerStats);
         profile.setCreatedAt(System.currentTimeMillis());
         profile.setUpdatedAt(System.currentTimeMillis());
         return playerProfileRepository.save(profile);

@@ -9,11 +9,11 @@ import lombok.Data;
 @Embeddable
 @Data
 public class PlayerStats {
-    private int gamesPlayed; // Количество сыгранных игр
+    private int gamesPlayed = 0; // Количество сыгранных игр
 
-    private int gamesWon; // Количество побед
+    private int gamesWon = 0; // Количество побед
 
-    private int gamesLost; // Количество поражений
+    private int gamesLost = 0; // Количество поражений
 
-    private int totalScore; // Общий набранный счет
+    private int totalScore = 0; // Общий набранный счет
 }
