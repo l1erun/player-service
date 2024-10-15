@@ -31,7 +31,6 @@ public class PlayerService {
         profile.setNickname(nickname);
         profile.setStatistics(playerStats);
         profile.setCreatedAt(System.currentTimeMillis());
-        profile.setUpdatedAt(System.currentTimeMillis());
         return playerProfileRepository.save(profile);
     }
 
@@ -59,7 +58,6 @@ public class PlayerService {
         existingProfile.setNickname(updatedProfile.getNickname());
         existingProfile.setAvatarUrl(updatedProfile.getAvatarUrl());
         existingProfile.setPreferences(updatedProfile.getPreferences());
-        existingProfile.setUpdatedAt(System.currentTimeMillis());
 
         return playerProfileRepository.save(existingProfile);
     }
@@ -81,8 +79,6 @@ public class PlayerService {
                 .orElseThrow(() -> new RuntimeException("Player profile not found"));
 
         existingProfile.setStatistics(updatedStats.getStatistics());
-        existingProfile.setUpdatedAt(System.currentTimeMillis());
-
         return playerProfileRepository.save(existingProfile);
     }
 }

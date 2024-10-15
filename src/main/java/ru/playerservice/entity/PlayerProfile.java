@@ -31,6 +31,4 @@ public class PlayerProfile {
     private PlayerPrefs preferences; // Настройки игрока
 
     private long createdAt; // Дата создания профиля
-
-    private long updatedAt; // Дата последнего обновления профиля
 }
