@@ -2,6 +2,7 @@ package ru.playerservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.playerservice.dto.PlayerDto;
 import ru.playerservice.entity.PlayerPrefs;
 import ru.playerservice.entity.PlayerProfile;
 import ru.playerservice.entity.PlayerStats;
@@ -80,5 +81,17 @@ public class PlayerService {
 
         existingProfile.setStatistics(updatedStats.getStatistics());
         return playerProfileRepository.save(existingProfile);
+    }
+
+    public PlayerDto getPlayerResponse(UUID playerId){
+        PlayerProfile playerProfile = getPlayerProfile(playerId)
+                .orElseThrow(() -> new RuntimeException("Player profile not found"));
+        PlayerDto playerDto = new PlayerDto();
+        playerDto.setId(playerProfile.getUserId());
+        playerDto.setNickname(playerProfile.getNickname());
+        playerDto.setAvatarUrl("test");
+        playerDto.setLanguage("ru");
+        System.out.println(playerDto);
+        return playerDto;
     }
 }

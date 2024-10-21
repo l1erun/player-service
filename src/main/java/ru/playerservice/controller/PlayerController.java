@@ -3,6 +3,7 @@ package ru.playerservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.playerservice.dto.PlayerDto;
 import ru.playerservice.entity.PlayerProfile;
 import ru.playerservice.service.PlayerService;
 
@@ -26,14 +27,12 @@ public class PlayerController {
         PlayerProfile playerProfile = playerService.createPlayerProfile(idUser, user.get("username").toString());
         return ResponseEntity.ok(playerProfile);
     }
+
     /**
      * Получает профиль текущего игрока.
      */
     @GetMapping("/me/{userId}")
-//    public PlayerProfile getMyProfile(Principal principal) {
     public PlayerProfile getMyProfile(@PathVariable UUID userId) {
-        System.out.println(userId);
-//        UUID userId = UUID.fromString(principal.getName());
         return playerService.getPlayerProfileByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("Player profile not found"));
     }
@@ -45,6 +44,12 @@ public class PlayerController {
     public PlayerProfile getPlayerProfile(@PathVariable UUID profileId) {
         return playerService.getPlayerProfile(profileId)
                 .orElseThrow(() -> new RuntimeException("Player profile not found"));
+    }
+
+    @GetMapping("/{profileId}/player-response")
+    public PlayerDto getPlayerResponse(@PathVariable UUID profileId) {
+        System.out.println(profileId);
+        return playerService.getPlayerResponse(profileId);
     }
 
     /**
